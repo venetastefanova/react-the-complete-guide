@@ -49,18 +49,11 @@ class App extends Component {
       cursor:"pointer"
   };
 
-
-    return (
-      <div className="App">
-        <h1>Hi</h1>
-        <button             style={inlineStyles}
-            onClick={this.togglePersonsHandler}>Switch name</button>
-      {/* wrapping the persons in div, checks if showsPersons is true or false and shows/hide
-      it uses ternary expressions as - ? expressionToShow : null */}
-       { 
-         this.state.showsPersons === false ? 
-         <div>
-          <Person 
+    let persons = null;
+    if(this.state.showsPersons){
+        persons = (
+          <div>
+            <Person 
                 name={this.state.persons[0].name}
                 age={this.state.persons[0].age}
                 click={this.switchNameHandler.bind(this,"veneta stefanova")}/>
@@ -73,9 +66,19 @@ class App extends Component {
                 age={this.state.persons[2].age}
                 click={this.switchNameHandler.bind(this, "Veneta Nikolaeva")}
                 >My hobbies are:</Person>    
-           </div> : null
-         }  
-        
+           </div>
+
+          
+        );
+    }
+    return (
+      <div className="App">
+        <h1>Hi</h1>
+        <button             style={inlineStyles}
+            onClick={this.togglePersonsHandler}>Switch name</button>
+        {/* rendering the same "the javascript way"; creating a variable and putting the jsx there
+        then just printing the value 'persons" down */}
+        {persons}  
       </div>
     );
   }
