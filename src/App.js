@@ -7,9 +7,9 @@ class App extends Component {
   //persons is whatever we name it
   state = {
     persons : [
-      {name: "Veneta",age: 22},
-      {name: "Joel", age:26},
-      {name:"Bear", age:2}
+      {id:'1', name: "Veneta",age: 22},
+      {id:'2', name: "Joel", age:26},
+      {id:'3', name:"Bear", age:2}
     ],
     otherState: "some other value",
     showsPersons: false
@@ -51,6 +51,7 @@ class App extends Component {
               this.state.persons.map((person, index) => {
               return <Person 
                       click ={()=>this.deletePersonHandler(index)}
+                      key={person.id} //using dummy id from the array, but usually comes from DB's id
                       name={person.name} 
                       age={person.name}/>
               })
