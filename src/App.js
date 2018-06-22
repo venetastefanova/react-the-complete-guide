@@ -15,14 +15,18 @@ class App extends Component {
     showsPersons: false
   }
 
-    nameChangedHandler = (event) =>{
-      this.setState({
-        persons : [
-          {name: "Veneta",age: 22},
-          {name: event.target.value, age:26},
-          {name:"Bear", age:2}
-        ]
-      })
+    nameChangedHandler = (event, id) =>{
+      const personIndex = this.state.persons.findIndex(p =>{
+        return p.id === id; // if the person returning from the array has the same id
+        // that the nameChangedHandler method receives as id
+      }); // finds which user we are editing
+      // gets the exact person without changing the state itself, so creating new object
+      const person = Object.assign({}, this.state.persons[personIndex]);
+      person.name = event.target.value; //updates the person name from the input event
+      const persons = [...this.state.persons];
+      persons[personIndex] = person;
+
+      this.setState({persons});
     }
 
     deletePersonHandler = (personIndex) =>{
@@ -53,7 +57,8 @@ class App extends Component {
                       click ={()=>this.deletePersonHandler(index)}
                       key={person.id} //using dummy id from the array, but usually comes from DB's id
                       name={person.name} 
-                      age={person.name}/>
+                      age={person.name}
+                      changed={(event)=>this.nameChangedHandler(event, person.id)}/>
               })
             }
              
