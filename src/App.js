@@ -40,7 +40,8 @@ class App extends Component {
     }
   render() {
     const inlineStyles={
-      backgrondColor: 'white',
+      backgroundColor: 'green',
+      color:'white',
       font:'inherit',
       border:'1px solid blue',
       padding: "8px",
@@ -60,17 +61,17 @@ class App extends Component {
                       age={person.name}
                       changed={(event)=>this.nameChangedHandler(event, person.id)}/>
               })
-            }
-             
+            }         
            </div>
-
-          
         );
+
+       inlineStyles.backgroundColor='red'; // changes the background color when show/hide persons
     }
     return (
       <div className="App">
         <h1>Hi</h1>
-        <button             style={inlineStyles}
+        <button  
+            style={inlineStyles}
             onClick={this.togglePersonsHandler}>Switch name</button>
         {/* rendering the same "the javascript way"; creating a variable and putting the jsx there
         then just printing the value 'persons" down */}
