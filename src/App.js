@@ -46,7 +46,7 @@ class App extends Component {
       border:'1px solid blue',
       padding: "8px",
       cursor:"pointer"
-  };
+    };
 
     let persons = null;
     if(this.state.showsPersons){
@@ -67,9 +67,21 @@ class App extends Component {
 
        inlineStyles.backgroundColor='red'; // changes the background color when show/hide persons
     }
+    // apply classes dynamically
+    let applyClasses = [];
+    if(this.state.persons.length<=2){
+      applyClasses.push('red'); // applyClasses = ["red"];
+    }
+    if(this.state.persons.length<=1){
+      applyClasses.push('bold'); // applyClasses = ["red, "bold];
+    }
+
+
+
     return (
       <div className="App">
         <h1>Hi</h1>
+        <p className={applyClasses.join(" ")} >this is really working </p>
         <button  
             style={inlineStyles}
             onClick={this.togglePersonsHandler}>Switch name</button>
