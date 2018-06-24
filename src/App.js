@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import classes from './App.css';
 import Person from "./Person/Person";
 
 class App extends Component {
@@ -70,16 +70,16 @@ class App extends Component {
     // apply classes dynamically
     let applyClasses = [];
     if(this.state.persons.length<=2){
-      applyClasses.push('red'); // applyClasses = ["red"];
+      applyClasses.push(classes.red); // applyClasses = ["red"];
     }
     if(this.state.persons.length<=1){
-      applyClasses.push('bold'); // applyClasses = ["red, "bold];
+      applyClasses.push(classes.bold); // applyClasses = ["red, "bold];
     }
 
 
 
     return (
-      <div className="App">
+      <div className={classes.App}>
         <h1>Hi</h1>
         <p className={applyClasses.join(" ")} >this is really working </p>
         <button  
