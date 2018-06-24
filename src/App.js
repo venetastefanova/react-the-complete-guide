@@ -39,16 +39,10 @@ class App extends Component {
         this.setState({showsPersons : !doesShow}); // changes the state for this value
     }
   render() {
-    const inlineStyles={
-      backgroundColor: 'green',
-      color:'white',
-      font:'inherit',
-      border:'1px solid blue',
-      padding: "8px",
-      cursor:"pointer"
-    };
 
     let persons = null;
+    let btnClass = '';
+
     if(this.state.showsPersons){
         persons = (
           <div>
@@ -64,8 +58,8 @@ class App extends Component {
             }         
            </div>
         );
-
-       inlineStyles.backgroundColor='red'; // changes the background color when show/hide persons
+        btnClass = classes.Red;
+      
     }
     // apply classes dynamically
     let applyClasses = [];
@@ -82,8 +76,8 @@ class App extends Component {
       <div className={classes.App}>
         <h1>Hi</h1>
         <p className={applyClasses.join(" ")} >this is really working </p>
-        <button  
-            style={inlineStyles}
+        <button
+            className={btnClass}  
             onClick={this.togglePersonsHandler}>Switch name</button>
         {/* rendering the same "the javascript way"; creating a variable and putting the jsx there
         then just printing the value 'persons" down */}
