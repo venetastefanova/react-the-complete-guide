@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import classes from './App.css';
-import Person from "../components/Persons/Person/Person";
-import ErrorBoundary from "../ErrorBoundary/ErrorBoundary";
+import Persons from '../components/Persons/Persons';
+import Cockpit from '../components/Cockpit/Cockpit';
 
 class App extends Component {
   //state available only in this kind of component with class
@@ -47,46 +47,28 @@ class App extends Component {
     if(this.state.showsPersons){
         persons = (
           <div>
-            {
-              this.state.persons.map((person, index) => {
-              return <ErrorBoundary
-              key={person.id} //using dummy id from the array, but usually comes from DB's id
-              >
-                        <Person 
-                        click ={()=>this.deletePersonHandler(index)}
-                        
-                        name={person.name} 
-                        age={person.name}
-                        changed={(event)=>this.nameChangedHandler(event, person.id)}/>          
-                    </ErrorBoundary>
-              })
-            }         
+            <Persons 
+              persons={this.state.persons}
+              clicked={this.deletePersonHandler}
+              changed={this.nameChangedHandler}
+              />    
            </div>
         );
         btnClass = classes.Red;
       
     }
-    // apply classes dynamically
-    let applyClasses = [];
-    if(this.state.persons.length<=2){
-      applyClasses.push(classes.red); // applyClasses = ["red"];
-    }
-    if(this.state.persons.length<=1){
-      applyClasses.push(classes.bold); // applyClasses = ["red, "bold];
-    }
+    
 
 
 
     return (
       <div className={classes.App}>
-        <h1>Hi</h1>
-        <p className={applyClasses.join(" ")} >this is really working </p>
-        <button
-            className={btnClass}  
-            onClick={this.togglePersonsHandler}>Switch name</button>
-        {/* rendering the same "the javascript way"; creating a variable and putting the jsx there
-        then just printing the value 'persons" down */}
-        {persons}  
+       <Cockpit
+          showPersons={this.state.showsPersons}
+          persons={this.state.persons}
+          click={this.togglePersonsHandler}
+          /> 
+        {persons}
       </div>
     );
   }
