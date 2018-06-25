@@ -4,9 +4,12 @@ import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
 
 class App extends Component {
-  //state available only in this kind of component with class
-  //persons is whatever we name it
-  state = {
+  constructor(props){
+    super(props);
+    console.log('App.js- inside constructor', props);
+    // same thing as defining it outside, so this is not recommended
+    //this is the old way of doing it
+    this.state = {
     persons : [
       {id:'1', name: "Veneta",age: 22},
       {id:'2', name: "Joel", age:26},
@@ -14,7 +17,19 @@ class App extends Component {
     ],
     otherState: "some other value",
     showsPersons: false
+  
+    }
   }
+
+  componentWillMount(){
+    console.log("App.js inside componentWillMount");
+  }
+
+  componentDidMount(){
+    console.log("App.js inside componentDidMount");
+    
+  }
+
 
     nameChangedHandler = (event, id) =>{
       const personIndex = this.state.persons.findIndex(p =>{
@@ -40,7 +55,7 @@ class App extends Component {
         this.setState({showsPersons : !doesShow}); // changes the state for this value
     }
   render() {
-
+    console.log("app.js inside render");
     let persons = null;
     if(this.state.showsPersons){
         persons = (
