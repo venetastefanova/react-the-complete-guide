@@ -28,7 +28,14 @@ class Persons extends Component {
 
               shouldComponentUpdate(nextProps, nextState){
                 console.log("[UPDATE Persons.js] inside shouldComponentUpdate", nextProps, nextState);
-                return nextProps.persons !== this.props.persons;
+                // returns true by default
+                // but if specific, then it has better performance
+                // because it doesn't re-render many things 
+                // but only if it meets the criteria listed down
+                return nextProps.persons !== this.props.persons ||
+                nextProps.changed !== this.props.changed ||
+                nextProps.clicked !== this.props.clicked;
+                // return true;
               }
 
               componentWillUpdate(nextProps, nextState){

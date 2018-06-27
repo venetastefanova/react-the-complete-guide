@@ -41,7 +41,11 @@ return true;
 
 componentWillUpdate(nextProps, nextState){
 console.log("[UPDATE App.js] inside componentWillUpdate", nextProps, nextState);
-
+  // return true by default
+// gaining better performance when we don't rerender things all the time
+// renders only if the criteria is met 
+  return nextState.persons !== this.state.persons ||
+  nextState.showPersons !== this.state.showPersons;
 }
 ComponentDidUpdate(){
 console.log("[UPDATE App.js] inside componentWillUpdate");
@@ -91,6 +95,7 @@ console.log("[UPDATE App.js] inside componentWillUpdate");
 
     return (
       <div className={classes.App}>
+        <button onClick={()=>{this.setState({showPersons:true})}}></button>
        <Cockpit
           showPersons={this.state.showsPersons}
           persons={this.state.persons}
