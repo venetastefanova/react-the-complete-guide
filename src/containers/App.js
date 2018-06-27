@@ -29,7 +29,24 @@ class App extends Component {
     console.log("App.js inside componentDidMount");
     
   }
+ //component updating lifecycle methods
+ componentWillReceiveProps(nextProps){
+  console.log("[UPDATE App.js] inside componentWillReceiveProps")
+}
 
+shouldComponentUpdate(nextProps, nextState){
+console.log("[UPDATE App.js] inside shouldComponentUpdate", nextProps, nextState);
+return true;
+}
+
+componentWillUpdate(nextProps, nextState){
+console.log("[UPDATE App.js] inside componentWillUpdate", nextProps, nextState);
+
+}
+ComponentDidUpdate(){
+console.log("[UPDATE App.js] inside componentWillUpdate");
+
+}
 
     nameChangedHandler = (event, id) =>{
       const personIndex = this.state.persons.findIndex(p =>{
