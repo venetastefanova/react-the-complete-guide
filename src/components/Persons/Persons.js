@@ -1,9 +1,9 @@
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import Person from './Person/Person';
 
 // moved the persons.map logic from App.js
 // props.persons is coming from app.js from persons object
-class Persons extends Component {
+class Persons extends PureComponent {
         constructor(props){
                 super(props);
                 console.log('Persons.js- inside constructor', props);
@@ -26,17 +26,17 @@ class Persons extends Component {
                   console.log("[UPDATE Persons.js] inside componentWillReceiveProps")
               }
 
-              shouldComponentUpdate(nextProps, nextState){
-                console.log("[UPDATE Persons.js] inside shouldComponentUpdate", nextProps, nextState);
-                // returns true by default
-                // but if specific, then it has better performance
-                // because it doesn't re-render many things 
-                // but only if it meets the criteria listed down
-                return nextProps.persons !== this.props.persons ||
-                nextProps.changed !== this.props.changed ||
-                nextProps.clicked !== this.props.clicked;
-                // return true;
-              }
+              // shouldComponentUpdate(nextProps, nextState){
+              //   console.log("[UPDATE Persons.js] inside shouldComponentUpdate", nextProps, nextState);
+              //   // returns true by default
+              //   // but if specific, then it has better performance
+              //   // because it doesn't re-render many things 
+              //   // but only if it meets the criteria listed down
+              //   return nextProps.persons !== this.props.persons ||
+              //   nextProps.changed !== this.props.changed ||
+              //   nextProps.clicked !== this.props.clicked;
+              //   // return true;
+              // }
 
               componentWillUpdate(nextProps, nextState){
                 console.log("[UPDATE Persons.js] inside componentWillUpdate", nextProps, nextState);
