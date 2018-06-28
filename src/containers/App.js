@@ -18,7 +18,8 @@ class App extends PureComponent {
       {id:'3', name:"Bear", age:2}
     ],
     otherState: "some other value",
-    showsPersons: false
+    showsPersons: false,
+    toggleClicked: 0
   
     }
   }
@@ -75,7 +76,15 @@ console.log("[UPDATE App.js] inside componentWillUpdate");
     }
     togglePersonsHandler = ()=>{
         const doesShow = this.state.showsPersons; //gets the value
-        this.setState({showsPersons : !doesShow}); // changes the state for this value
+        //access state like this if you rely on the previous state
+        // because it's async and sometimes it might not be passing what you expect
+        //passes previousState and the props and changes them accordingly
+        this.setState((previousState, props)=>{
+          return{
+            showsPersons : !doesShow,
+            toggleClicked: previousState.toggleClicked+1 
+          }        
+        }); // changes the state for this value
     }
   render() {
     console.log("app.js inside render");
