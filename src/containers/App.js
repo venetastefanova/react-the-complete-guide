@@ -5,6 +5,9 @@ import Cockpit from '../components/Cockpit/Cockpit';
 import Aux from "../hoc/Aux";
 import withClass from "../hoc/withClass";
 
+// with export makes it available out of this file
+export const AuthenticationContext = React.createContext(false);
+
 class App extends PureComponent {
   constructor(props){
     super(props);
@@ -19,7 +22,8 @@ class App extends PureComponent {
     ],
     otherState: "some other value",
     showsPersons: false,
-    toggleClicked: 0
+    toggleClicked: 0,
+    authenticated : false
   
     }
   }
@@ -86,6 +90,10 @@ console.log("[UPDATE App.js] inside componentWillUpdate");
           }        
         }); // changes the state for this value
     }
+
+    loginHandler=()=>{
+        this.setState({authenticated:true});
+    }
   render() {
     console.log("app.js inside render");
     let persons = null;
@@ -110,9 +118,13 @@ console.log("[UPDATE App.js] inside componentWillUpdate");
        <Cockpit
           showPersons={this.state.showsPersons}
           persons={this.state.persons}
-          click={this.togglePersonsHandler}
-          /> 
+          login ={this.loginHandler}
+          click={this.togglePersonsHandler}/> 
+          {/* providing the state authetnicated to all child components,
+          no matter on which level they are */}
+          <AuthenticationContext.Provider value={this.state.authenticated}>
         {persons}
+        </AuthenticationContext.Provider>
         </Aux>
     );
   }
