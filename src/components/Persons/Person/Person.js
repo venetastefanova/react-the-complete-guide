@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import classes from "./Person.css";
 import Aux from "../../../hoc/Aux";
 import withClass from "../../../hoc/withClass";
-
+import PropTypes from 'prop-types';
 
 class Person extends Component {
     constructor(props){
@@ -35,5 +35,14 @@ class Person extends Component {
     }
     
 }
+// adding validation to the props; what kind of data types it should return
+
+Person.propTypes = {
+    click: PropTypes.func,
+    name:PropTypes.string,
+    age:PropTypes.number,
+    changed: PropTypes.func
+}
+
 // sends it to withClass.js
 export default withClass(Person, classes.Person);
