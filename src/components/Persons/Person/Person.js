@@ -8,8 +8,8 @@ class Person extends Component {
     constructor(props){
         super(props);
         console.log('Person.js- inside constructor', props);
-        // same thing as defining it outside, so this is not recommended
-        //this is the old way of doing it
+        // creating reference
+        this.inputElement = React.createRef();
        
       }
     
@@ -19,9 +19,15 @@ class Person extends Component {
     
       componentDidMount(){
         console.log("Person.js inside componentDidMount");
-        
-      }
+        // used only on the stateful components
+        if(this.props.position === 0){
+            this.inputElement.current.focus();            
+        }
+    }
 
+    focus(){
+        this.inputElement.current.focus();
+    }
     render(){
         console.log("person.js inside render");
         
@@ -29,7 +35,12 @@ class Person extends Component {
             <Aux>
                 <p onClick={this.props.click}> I'm a {this.props.name} and I am {this.props.age} years old</p>
                 <p>{this.props.children}</p>
-                <input type="text" onChange={this.props.changed} value={this.props.name}/>
+                <input 
+                    // used only on the stateful components
+                    ref={this.inputElement}
+                    type="text" 
+                    onChange={this.props.changed}
+                    value={this.props.name}/>
             </Aux>
         );
     }

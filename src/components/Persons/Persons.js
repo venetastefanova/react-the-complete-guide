@@ -7,9 +7,7 @@ class Persons extends PureComponent {
         constructor(props){
                 super(props);
                 console.log('Persons.js- inside constructor', props);
-                // same thing as defining it outside, so this is not recommended
-                //this is the old way of doing it
-               
+                this.lastPersonRef = React.createRef();       
               }
             
               componentWillMount(){
@@ -53,7 +51,9 @@ class Persons extends PureComponent {
                 return <Person // props.clickced is coming from app.js
                           click ={()=>this.props.clicked(index)}
                           key={person.id} //using dummy id from the array, but usually comes from DB's id
-                          name={person.name} 
+                          name={person.name}
+                          ref = {this.lastPersonRef}
+                          position ={index}
                           age={person.age} // props.changes is coming fro app.js
                           changed={(event)=>this.props.changed(event, person.id)}/>          
                     
